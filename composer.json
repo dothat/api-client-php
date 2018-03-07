@@ -1,0 +1,21 @@
+{
+    "name": "dothat/dothat-api-client-php",
+    "description": "DoThat PHP API Client Library.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "DoThat",
+            "email": "info@dothat.in",
+            "homepage": "http://www.dothat.in/"
+        }
+    ],
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "google/apiclient": "^2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
