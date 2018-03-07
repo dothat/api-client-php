@@ -16,6 +16,4 @@ return array(
     'DoThatAPI_Service_Customer_Route' => $baseDir . '/src/Customer.php',
     'DoThatAPI_Service_Customer_ServiceArea' => $baseDir . '/src/Customer.php',
     'DoThatAPI_Service_Customer_ServicedAddress' => $baseDir . '/src/Customer.php',
-    'Google_Service_Exception' => $vendorDir . '/google/apiclient/src/Google/Service/Exception.php',
-    'Google_Service_Resource' => $vendorDir . '/google/apiclient/src/Google/Service/Resource.php',
 );
