@@ -145,7 +145,7 @@ class DoThatAPI_Service_Order extends Google_Service
                 ),
               ),
             ),'getOrder' => array(
-              'path' => '{svcProviderId}/customers/{custId}/orders/{id}',
+              'path' => '{svcProviderId}/customers/{custId}/orders/{ordId}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'svcProviderId' => array(
@@ -158,7 +158,7 @@ class DoThatAPI_Service_Order extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'id' => array(
+                'ordId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -258,13 +258,13 @@ class DoThatAPI_Service_Order extends Google_Service
    *
    * @param string $svcProviderId
    * @param string $custId
-   * @param string $id
+   * @param string $ordId
    * @param array $optParams Optional parameters.
    * @return DoThatAPI_Service_Order_Order
    */
-  public function getOrder($svcProviderId, $custId, $id, $optParams = array())
+  public function getOrder($svcProviderId, $custId, $ordId, $optParams = array())
   {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'id' => $id);
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'ordId' => $ordId);
     $params = array_merge($params, $optParams);
     return $this->base_methods->call('getOrder', array($params), "DoThatAPI_Service_Order_Order");
   }
