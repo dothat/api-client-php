@@ -16,10 +16,10 @@
  */
 
 /**
- * Service definition for Customer (v1).
+ * Service definition for OrderAPI (v1).
  *
  * <p>
- * API to access Customers</p>
+ * API to access Orders</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class DoThatAPI_Service_Customer extends Google_Service
+class DoThatAPI_Service_OrderAPI extends Google_Service
 {
   /** View your email address. */
   const USERINFO_EMAIL =
@@ -38,7 +38,7 @@ class DoThatAPI_Service_Customer extends Google_Service
   private $base_methods;
 
   /**
-   * Constructs the internal representation of the Customer service.
+   * Constructs the internal representation of the OrderAPI service.
    *
    * @param Google_Client $client
    */
@@ -46,9 +46,13 @@ class DoThatAPI_Service_Customer extends Google_Service
   {
     parent::__construct($client);
     $this->rootUrl = 'https://dev-dothat-api.appspot.com/_ah/api/';
-    $this->servicePath = 'customer/v1/serviceProviders/';
+    $this->servicePath = 'order/v1/serviceProviders/';
     $this->version = 'v1';
-    $this->serviceName = 'customer';
+    $this->serviceName = 'order';
+    $this->init();
+  }
+
+  public function init() {
 
     $this->base_methods = new Google_Service_Resource(
         $this,
@@ -56,8 +60,8 @@ class DoThatAPI_Service_Customer extends Google_Service
         '',
         array(
           'methods' => array(
-            'addCustomerAddressRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/addresses',
+            'createOrder' => array(
+              'path' => '{svcProviderId}/customers/{custId}/orders',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'svcProviderId' => array(
@@ -71,62 +75,8 @@ class DoThatAPI_Service_Customer extends Google_Service
                   'required' => true,
                 ),
               ),
-            ),'addCustomerContactRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/contacts',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'createCustomerRequest' => array(
-              'path' => '{svcProviderId}/customers',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'findCustomersRequest' => array(
-              'path' => '{svcProviderId}/customers',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'query' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),'getCustomerRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'removeCustomerAddressRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/addresses/{addrId}',
+            ),'deleteOrder' => array(
+              'path' => '{svcProviderId}/customers/{custId}/orders/{ordId}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'svcProviderId' => array(
@@ -139,44 +89,87 @@ class DoThatAPI_Service_Customer extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'addrId' => array(
+                'ordId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
-                'expunge' => array(
+              ),
+            ),'findOrdersForCustomer' => array(
+              'path' => '{svcProviderId}/customers/{custId}/orders',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'svcProviderId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'custId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'startDate' => array(
                   'location' => 'query',
-                  'type' => 'boolean',
-                  'required' => true,
-                ),
-              ),
-            ),'removeCustomerContactRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/contacts/{custContactId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
-                'custId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custContactId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'expunge' => array(
+                'endDate' => array(
                   'location' => 'query',
-                  'type' => 'boolean',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'status' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'findOrdersForServiceProvider' => array(
+              'path' => '{svcProviderId}/orders',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'svcProviderId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'startDate' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'endDate' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'status' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'getOrder' => array(
+              'path' => '{svcProviderId}/customers/{custId}/orders/{ordId}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'svcProviderId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'custId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'ordId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
                   'required' => true,
                 ),
               ),
-            ),'updateCustomerAddressRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/addresses/{addrId}',
+            ),'updateOrder' => array(
+              'path' => '{svcProviderId}/customers/{custId}/orders/{ordId}',
               'httpMethod' => 'PUT',
               'parameters' => array(
                 'svcProviderId' => array(
@@ -189,42 +182,7 @@ class DoThatAPI_Service_Customer extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'addrId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'updateCustomerContactRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}/contacts/{custContactId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custContactId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'updateCustomerRequest' => array(
-              'path' => '{svcProviderId}/customers/{custId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'svcProviderId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'custId' => array(
+                'ordId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -236,156 +194,99 @@ class DoThatAPI_Service_Customer extends Google_Service
     );
   }
   /**
-   * (addCustomerAddressRequest)
+   * (createOrder)
    *
    * @param string $svcProviderId
    * @param string $custId
-   * @param DoThatAPI_CustomerAddress $postBody
+   * @param DoThatAPI_Order $postBody
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerAddress
+   * @return DoThatAPI_Service_OrderAPI_Order
    */
-  public function addCustomerAddressRequest($svcProviderId, $custId, DoThatAPI_Service_Customer_CustomerAddress $postBody, $optParams = array())
+  public function createOrder($svcProviderId, $custId, DoThatAPI_Service_OrderAPI_Order $postBody, $optParams = array())
   {
     $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('addCustomerAddressRequest', array($params), "DoThatAPI_Service_Customer_CustomerAddress");
+    return $this->base_methods->call('createOrder', array($params), "DoThatAPI_Service_OrderAPI_Order");
   }
   /**
-   * (addCustomerContactRequest)
+   * (deleteOrder)
    *
    * @param string $svcProviderId
    * @param string $custId
-   * @param DoThatAPI_CustomerContact $postBody
+   * @param string $ordId
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerContact
    */
-  public function addCustomerContactRequest($svcProviderId, $custId, DoThatAPI_Service_Customer_CustomerContact $postBody, $optParams = array())
+  public function deleteOrder($svcProviderId, $custId, $ordId, $optParams = array())
   {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'postBody' => $postBody);
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'ordId' => $ordId);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('addCustomerContactRequest', array($params), "DoThatAPI_Service_Customer_CustomerContact");
+    return $this->base_methods->call('deleteOrder', array($params));
   }
   /**
-   * (createCustomerRequest)
-   *
-   * @param string $svcProviderId
-   * @param DoThatAPI_Customer $postBody
-   * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_Customer
-   */
-  public function createCustomerRequest($svcProviderId, DoThatAPI_Service_Customer_Customer $postBody, $optParams = array())
-  {
-    $params = array('svcProviderId' => $svcProviderId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->base_methods->call('createCustomerRequest', array($params), "DoThatAPI_Service_Customer_Customer");
-  }
-  /**
-   * (findCustomersRequest)
-   *
-   * @param string $svcProviderId
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string query
-   * @return DoThatAPI_Service_Customer_CustomerCollection
-   */
-  public function findCustomersRequest($svcProviderId, $optParams = array())
-  {
-    $params = array('svcProviderId' => $svcProviderId);
-    $params = array_merge($params, $optParams);
-    return $this->base_methods->call('findCustomersRequest', array($params), "DoThatAPI_Service_Customer_CustomerCollection");
-  }
-  /**
-   * (getCustomerRequest)
+   * (findOrdersForCustomer)
    *
    * @param string $svcProviderId
    * @param string $custId
+   * @param string $startDate
+   * @param string $endDate
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_Customer
+   *
+   * @opt_param string status
+   * @return DoThatAPI_Service_OrderAPI_OrderCollection
    */
-  public function getCustomerRequest($svcProviderId, $custId, $optParams = array())
+  public function findOrdersForCustomer($svcProviderId, $custId, $startDate, $endDate, $optParams = array())
   {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId);
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'startDate' => $startDate, 'endDate' => $endDate);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('getCustomerRequest', array($params), "DoThatAPI_Service_Customer_Customer");
+    return $this->base_methods->call('findOrdersForCustomer', array($params), "DoThatAPI_Service_OrderAPI_OrderCollection");
   }
   /**
-   * (removeCustomerAddressRequest)
+   * (findOrdersForServiceProvider)
+   *
+   * @param string $svcProviderId
+   * @param string $startDate
+   * @param string $endDate
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string status
+   * @return DoThatAPI_Service_OrderAPI_OrderCollection
+   */
+  public function findOrdersForServiceProvider($svcProviderId, $startDate, $endDate, $optParams = array())
+  {
+    $params = array('svcProviderId' => $svcProviderId, 'startDate' => $startDate, 'endDate' => $endDate);
+    $params = array_merge($params, $optParams);
+    return $this->base_methods->call('findOrdersForServiceProvider', array($params), "DoThatAPI_Service_OrderAPI_OrderCollection");
+  }
+  /**
+   * (getOrder)
    *
    * @param string $svcProviderId
    * @param string $custId
-   * @param string $addrId
-   * @param bool $expunge
+   * @param string $ordId
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerAddress
+   * @return DoThatAPI_Service_OrderAPI_Order
    */
-  public function removeCustomerAddressRequest($svcProviderId, $custId, $addrId, $expunge, $optParams = array())
+  public function getOrder($svcProviderId, $custId, $ordId, $optParams = array())
   {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'addrId' => $addrId, 'expunge' => $expunge);
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'ordId' => $ordId);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('removeCustomerAddressRequest', array($params), "DoThatAPI_Service_Customer_CustomerAddress");
+    return $this->base_methods->call('getOrder', array($params), "DoThatAPI_Service_OrderAPI_Order");
   }
   /**
-   * (removeCustomerContactRequest)
+   * (updateOrder)
    *
    * @param string $svcProviderId
    * @param string $custId
-   * @param string $custContactId
-   * @param bool $expunge
+   * @param string $ordId
+   * @param DoThatAPI_Order $postBody
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerContact
+   * @return DoThatAPI_Service_OrderAPI_Order
    */
-  public function removeCustomerContactRequest($svcProviderId, $custId, $custContactId, $expunge, $optParams = array())
+  public function updateOrder($svcProviderId, $custId, $ordId, DoThatAPI_Service_OrderAPI_Order $postBody, $optParams = array())
   {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'custContactId' => $custContactId, 'expunge' => $expunge);
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'ordId' => $ordId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('removeCustomerContactRequest', array($params), "DoThatAPI_Service_Customer_CustomerContact");
-  }
-  /**
-   * (updateCustomerAddressRequest)
-   *
-   * @param string $svcProviderId
-   * @param string $custId
-   * @param string $addrId
-   * @param DoThatAPI_CustomerAddress $postBody
-   * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerAddress
-   */
-  public function updateCustomerAddressRequest($svcProviderId, $custId, $addrId, DoThatAPI_Service_Customer_CustomerAddress $postBody, $optParams = array())
-  {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'addrId' => $addrId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->base_methods->call('updateCustomerAddressRequest', array($params), "DoThatAPI_Service_Customer_CustomerAddress");
-  }
-  /**
-   * (updateCustomerContactRequest)
-   *
-   * @param string $svcProviderId
-   * @param string $custId
-   * @param string $custContactId
-   * @param DoThatAPI_CustomerContact $postBody
-   * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_CustomerContact
-   */
-  public function updateCustomerContactRequest($svcProviderId, $custId, $custContactId, DoThatAPI_Service_Customer_CustomerContact $postBody, $optParams = array())
-  {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'custContactId' => $custContactId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->base_methods->call('updateCustomerContactRequest', array($params), "DoThatAPI_Service_Customer_CustomerContact");
-  }
-  /**
-   * (updateCustomerRequest)
-   *
-   * @param string $svcProviderId
-   * @param string $custId
-   * @param DoThatAPI_Customer $postBody
-   * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Customer_Customer
-   */
-  public function updateCustomerRequest($svcProviderId, $custId, DoThatAPI_Service_Customer_Customer $postBody, $optParams = array())
-  {
-    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->base_methods->call('updateCustomerRequest', array($params), "DoThatAPI_Service_Customer_Customer");
+    return $this->base_methods->call('updateOrder', array($params), "DoThatAPI_Service_OrderAPI_Order");
   }
 }
 
@@ -393,16 +294,77 @@ class DoThatAPI_Service_Customer extends Google_Service
 
 
 
-class DoThatAPI_Service_Customer_Customer extends Google_Collection
+class DoThatAPI_Service_OrderAPI_Amount extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $currency;
+  public $value;
+
+
+  public function setCurrency($currency)
+  {
+    $this->currency = $currency;
+  }
+  public function getCurrency()
+  {
+    return $this->currency;
+  }
+  public function setValue($value)
+  {
+    $this->value = $value;
+  }
+  public function getValue()
+  {
+    return $this->value;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ChangeContext extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $initiatorType;
+  public $messageId;
+  public $userIdentifier;
+
+
+  public function setInitiatorType($initiatorType)
+  {
+    $this->initiatorType = $initiatorType;
+  }
+  public function getInitiatorType()
+  {
+    return $this->initiatorType;
+  }
+  public function setMessageId($messageId)
+  {
+    $this->messageId = $messageId;
+  }
+  public function getMessageId()
+  {
+    return $this->messageId;
+  }
+  public function setUserIdentifier($userIdentifier)
+  {
+    $this->userIdentifier = $userIdentifier;
+  }
+  public function getUserIdentifier()
+  {
+    return $this->userIdentifier;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_Customer extends Google_Collection
 {
   protected $collection_key = 'contacts';
   protected $internal_gapi_mappings = array(
   );
   public $active;
-  protected $addressesType = 'Dothatapi_Service_Customer_CustomerAddress';
+  protected $addressesType = 'Dothatapi_Service_OrderAPI_CustomerAddress';
   protected $addressesDataType = 'array';
   public $businessName;
-  protected $contactsType = 'Dothatapi_Service_Customer_CustomerContact';
+  protected $contactsType = 'Dothatapi_Service_OrderAPI_CustomerContact';
   protected $contactsDataType = 'array';
   public $creationTimestamp;
   public $customerId;
@@ -494,7 +456,7 @@ class DoThatAPI_Service_Customer_Customer extends Google_Collection
   }
 }
 
-class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
+class DoThatAPI_Service_OrderAPI_CustomerAddress extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -518,13 +480,13 @@ class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
   public $modificationTimestamp;
   public $postalCode;
   public $primary;
-  protected $routeType = 'Dothatapi_Service_Customer_Route';
+  protected $routeType = 'Dothatapi_Service_OrderAPI_Route';
   protected $routeDataType = '';
   public $routeId;
-  protected $serviceAreaType = 'Dothatapi_Service_Customer_ServiceArea';
+  protected $serviceAreaType = 'Dothatapi_Service_OrderAPI_ServiceArea';
   protected $serviceAreaDataType = '';
   public $serviceAreaId;
-  protected $servicedAddressType = 'Dothatapi_Service_Customer_ServicedAddress';
+  protected $servicedAddressType = 'Dothatapi_Service_OrderAPI_ServicedAddress';
   protected $servicedAddressDataType = '';
   public $servicedAddressId;
   public $state;
@@ -695,7 +657,7 @@ class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
   {
     return $this->primary;
   }
-  public function setRoute(Dothatapi_Service_Customer_Route $route)
+  public function setRoute(Dothatapi_Service_OrderAPI_Route $route)
   {
     $this->route = $route;
   }
@@ -711,7 +673,7 @@ class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
   {
     return $this->routeId;
   }
-  public function setServiceArea(Dothatapi_Service_Customer_ServiceArea $serviceArea)
+  public function setServiceArea(Dothatapi_Service_OrderAPI_ServiceArea $serviceArea)
   {
     $this->serviceArea = $serviceArea;
   }
@@ -727,7 +689,7 @@ class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
   {
     return $this->serviceAreaId;
   }
-  public function setServicedAddress(Dothatapi_Service_Customer_ServicedAddress $servicedAddress)
+  public function setServicedAddress(Dothatapi_Service_OrderAPI_ServicedAddress $servicedAddress)
   {
     $this->servicedAddress = $servicedAddress;
   }
@@ -793,26 +755,7 @@ class DoThatAPI_Service_Customer_CustomerAddress extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Customer_CustomerCollection extends Google_Collection
-{
-  protected $collection_key = 'items';
-  protected $internal_gapi_mappings = array(
-  );
-  protected $itemsType = 'Dothatapi_Service_Customer_Customer';
-  protected $itemsDataType = 'array';
-
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-  public function getItems()
-  {
-    return $this->items;
-  }
-}
-
-class DoThatAPI_Service_Customer_CustomerContact extends Google_Collection
+class DoThatAPI_Service_OrderAPI_CustomerContact extends Google_Collection
 {
   protected $collection_key = 'phoneNumbers';
   protected $internal_gapi_mappings = array(
@@ -821,12 +764,12 @@ class DoThatAPI_Service_Customer_CustomerContact extends Google_Collection
   public $contactId;
   public $creationTimestamp;
   public $deleted;
-  protected $emailAddressesType = 'Dothatapi_Service_Customer_EmailAddress';
+  protected $emailAddressesType = 'Dothatapi_Service_OrderAPI_EmailAddress';
   protected $emailAddressesDataType = 'array';
   public $label;
   public $modificationTimestamp;
   public $name;
-  protected $phoneNumbersType = 'Dothatapi_Service_Customer_PhoneNumber';
+  protected $phoneNumbersType = 'Dothatapi_Service_OrderAPI_PhoneNumber';
   protected $phoneNumbersDataType = 'array';
   public $primary;
   public $verificationStatus;
@@ -931,7 +874,7 @@ class DoThatAPI_Service_Customer_CustomerContact extends Google_Collection
   }
 }
 
-class DoThatAPI_Service_Customer_EmailAddress extends Google_Model
+class DoThatAPI_Service_OrderAPI_EmailAddress extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -993,7 +936,173 @@ class DoThatAPI_Service_Customer_EmailAddress extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Customer_PhoneNumber extends Google_Model
+class DoThatAPI_Service_OrderAPI_Order extends Google_Collection
+{
+  protected $collection_key = 'orderItems';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $changeContextType = 'Dothatapi_Service_OrderAPI_ChangeContext';
+  protected $changeContextDataType = '';
+  public $creationTimestamp;
+  protected $customerType = 'Dothatapi_Service_OrderAPI_Customer';
+  protected $customerDataType = '';
+  public $date;
+  public $modificationTimestamp;
+  public $orderId;
+  protected $orderItemsType = 'Dothatapi_Service_OrderAPI_OrderItem';
+  protected $orderItemsDataType = 'array';
+  public $orderSource;
+  public $placementStatus;
+  public $version;
+
+
+  public function setChangeContext(Dothatapi_Service_OrderAPI_ChangeContext $changeContext)
+  {
+    $this->changeContext = $changeContext;
+  }
+  public function getChangeContext()
+  {
+    return $this->changeContext;
+  }
+  public function setCreationTimestamp($creationTimestamp)
+  {
+    $this->creationTimestamp = $creationTimestamp;
+  }
+  public function getCreationTimestamp()
+  {
+    return $this->creationTimestamp;
+  }
+  public function setCustomer(Dothatapi_Service_OrderAPI_Customer $customer)
+  {
+    $this->customer = $customer;
+  }
+  public function getCustomer()
+  {
+    return $this->customer;
+  }
+  public function setDate($date)
+  {
+    $this->date = $date;
+  }
+  public function getDate()
+  {
+    return $this->date;
+  }
+  public function setModificationTimestamp($modificationTimestamp)
+  {
+    $this->modificationTimestamp = $modificationTimestamp;
+  }
+  public function getModificationTimestamp()
+  {
+    return $this->modificationTimestamp;
+  }
+  public function setOrderId($orderId)
+  {
+    $this->orderId = $orderId;
+  }
+  public function getOrderId()
+  {
+    return $this->orderId;
+  }
+  public function setOrderItems($orderItems)
+  {
+    $this->orderItems = $orderItems;
+  }
+  public function getOrderItems()
+  {
+    return $this->orderItems;
+  }
+  public function setOrderSource($orderSource)
+  {
+    $this->orderSource = $orderSource;
+  }
+  public function getOrderSource()
+  {
+    return $this->orderSource;
+  }
+  public function setPlacementStatus($placementStatus)
+  {
+    $this->placementStatus = $placementStatus;
+  }
+  public function getPlacementStatus()
+  {
+    return $this->placementStatus;
+  }
+  public function setVersion($version)
+  {
+    $this->version = $version;
+  }
+  public function getVersion()
+  {
+    return $this->version;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_OrderCollection extends Google_Collection
+{
+  protected $collection_key = 'items';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $itemsType = 'Dothatapi_Service_OrderAPI_Order';
+  protected $itemsDataType = 'array';
+
+
+  public function setItems($items)
+  {
+    $this->items = $items;
+  }
+  public function getItems()
+  {
+    return $this->items;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_OrderItem extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $placementStatus;
+  protected $productType = 'Dothatapi_Service_OrderAPI_Product';
+  protected $productDataType = '';
+  public $productId;
+  public $quantity;
+
+
+  public function setPlacementStatus($placementStatus)
+  {
+    $this->placementStatus = $placementStatus;
+  }
+  public function getPlacementStatus()
+  {
+    return $this->placementStatus;
+  }
+  public function setProduct(Dothatapi_Service_OrderAPI_Product $product)
+  {
+    $this->product = $product;
+  }
+  public function getProduct()
+  {
+    return $this->product;
+  }
+  public function setProductId($productId)
+  {
+    $this->productId = $productId;
+  }
+  public function getProductId()
+  {
+    return $this->productId;
+  }
+  public function setQuantity($quantity)
+  {
+    $this->quantity = $quantity;
+  }
+  public function getQuantity()
+  {
+    return $this->quantity;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_PhoneNumber extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1055,7 +1164,308 @@ class DoThatAPI_Service_Customer_PhoneNumber extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Customer_Route extends Google_Model
+class DoThatAPI_Service_OrderAPI_Product extends Google_Collection
+{
+  protected $collection_key = 'priceLists';
+  protected $internal_gapi_mappings = array(
+  );
+  public $active;
+  protected $availabilityType = 'Dothatapi_Service_OrderAPI_ProductAvailability';
+  protected $availabilityDataType = '';
+  public $category;
+  public $creationTimestamp;
+  public $deleted;
+  public $description;
+  public $modificationTimestamp;
+  public $name;
+  protected $priceListsType = 'Dothatapi_Service_OrderAPI_ProductPriceList';
+  protected $priceListsDataType = 'array';
+  public $productCode;
+  public $productId;
+  public $quantity;
+  public $quantityUnit;
+  public $serviceProviderId;
+  public $version;
+  protected $visibilityType = 'Dothatapi_Service_OrderAPI_ProductVisibility';
+  protected $visibilityDataType = '';
+
+
+  public function setActive($active)
+  {
+    $this->active = $active;
+  }
+  public function getActive()
+  {
+    return $this->active;
+  }
+  public function setAvailability(Dothatapi_Service_OrderAPI_ProductAvailability $availability)
+  {
+    $this->availability = $availability;
+  }
+  public function getAvailability()
+  {
+    return $this->availability;
+  }
+  public function setCategory($category)
+  {
+    $this->category = $category;
+  }
+  public function getCategory()
+  {
+    return $this->category;
+  }
+  public function setCreationTimestamp($creationTimestamp)
+  {
+    $this->creationTimestamp = $creationTimestamp;
+  }
+  public function getCreationTimestamp()
+  {
+    return $this->creationTimestamp;
+  }
+  public function setDeleted($deleted)
+  {
+    $this->deleted = $deleted;
+  }
+  public function getDeleted()
+  {
+    return $this->deleted;
+  }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  public function setModificationTimestamp($modificationTimestamp)
+  {
+    $this->modificationTimestamp = $modificationTimestamp;
+  }
+  public function getModificationTimestamp()
+  {
+    return $this->modificationTimestamp;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setPriceLists($priceLists)
+  {
+    $this->priceLists = $priceLists;
+  }
+  public function getPriceLists()
+  {
+    return $this->priceLists;
+  }
+  public function setProductCode($productCode)
+  {
+    $this->productCode = $productCode;
+  }
+  public function getProductCode()
+  {
+    return $this->productCode;
+  }
+  public function setProductId($productId)
+  {
+    $this->productId = $productId;
+  }
+  public function getProductId()
+  {
+    return $this->productId;
+  }
+  public function setQuantity($quantity)
+  {
+    $this->quantity = $quantity;
+  }
+  public function getQuantity()
+  {
+    return $this->quantity;
+  }
+  public function setQuantityUnit($quantityUnit)
+  {
+    $this->quantityUnit = $quantityUnit;
+  }
+  public function getQuantityUnit()
+  {
+    return $this->quantityUnit;
+  }
+  public function setServiceProviderId($serviceProviderId)
+  {
+    $this->serviceProviderId = $serviceProviderId;
+  }
+  public function getServiceProviderId()
+  {
+    return $this->serviceProviderId;
+  }
+  public function setVersion($version)
+  {
+    $this->version = $version;
+  }
+  public function getVersion()
+  {
+    return $this->version;
+  }
+  public function setVisibility(Dothatapi_Service_OrderAPI_ProductVisibility $visibility)
+  {
+    $this->visibility = $visibility;
+  }
+  public function getVisibility()
+  {
+    return $this->visibility;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ProductAvailability extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $availableFrom;
+  public $availableUntil;
+  protected $scheduleType = 'Dothatapi_Service_OrderAPI_Schedule';
+  protected $scheduleDataType = '';
+
+
+  public function setAvailableFrom($availableFrom)
+  {
+    $this->availableFrom = $availableFrom;
+  }
+  public function getAvailableFrom()
+  {
+    return $this->availableFrom;
+  }
+  public function setAvailableUntil($availableUntil)
+  {
+    $this->availableUntil = $availableUntil;
+  }
+  public function getAvailableUntil()
+  {
+    return $this->availableUntil;
+  }
+  public function setSchedule(Dothatapi_Service_OrderAPI_Schedule $schedule)
+  {
+    $this->schedule = $schedule;
+  }
+  public function getSchedule()
+  {
+    return $this->schedule;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ProductPrice extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $amountType = 'Dothatapi_Service_OrderAPI_Amount';
+  protected $amountDataType = '';
+  public $duration;
+  public $durationType;
+  protected $scheduleType = 'Dothatapi_Service_OrderAPI_Schedule';
+  protected $scheduleDataType = '';
+
+
+  public function setAmount(Dothatapi_Service_OrderAPI_Amount $amount)
+  {
+    $this->amount = $amount;
+  }
+  public function getAmount()
+  {
+    return $this->amount;
+  }
+  public function setDuration($duration)
+  {
+    $this->duration = $duration;
+  }
+  public function getDuration()
+  {
+    return $this->duration;
+  }
+  public function setDurationType($durationType)
+  {
+    $this->durationType = $durationType;
+  }
+  public function getDurationType()
+  {
+    return $this->durationType;
+  }
+  public function setSchedule(Dothatapi_Service_OrderAPI_Schedule $schedule)
+  {
+    $this->schedule = $schedule;
+  }
+  public function getSchedule()
+  {
+    return $this->schedule;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ProductPriceList extends Google_Collection
+{
+  protected $collection_key = 'prices';
+  protected $internal_gapi_mappings = array(
+  );
+  public $endDate;
+  protected $pricesType = 'Dothatapi_Service_OrderAPI_ProductPrice';
+  protected $pricesDataType = 'array';
+  public $startDate;
+
+
+  public function setEndDate($endDate)
+  {
+    $this->endDate = $endDate;
+  }
+  public function getEndDate()
+  {
+    return $this->endDate;
+  }
+  public function setPrices($prices)
+  {
+    $this->prices = $prices;
+  }
+  public function getPrices()
+  {
+    return $this->prices;
+  }
+  public function setStartDate($startDate)
+  {
+    $this->startDate = $startDate;
+  }
+  public function getStartDate()
+  {
+    return $this->startDate;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ProductVisibility extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $visibleOnlyForServiceProvider;
+  public $visibleOnlyForWhiteListedCustomers;
+
+
+  public function setVisibleOnlyForServiceProvider($visibleOnlyForServiceProvider)
+  {
+    $this->visibleOnlyForServiceProvider = $visibleOnlyForServiceProvider;
+  }
+  public function getVisibleOnlyForServiceProvider()
+  {
+    return $this->visibleOnlyForServiceProvider;
+  }
+  public function setVisibleOnlyForWhiteListedCustomers($visibleOnlyForWhiteListedCustomers)
+  {
+    $this->visibleOnlyForWhiteListedCustomers = $visibleOnlyForWhiteListedCustomers;
+  }
+  public function getVisibleOnlyForWhiteListedCustomers()
+  {
+    return $this->visibleOnlyForWhiteListedCustomers;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_Route extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1135,7 +1545,34 @@ class DoThatAPI_Service_Customer_Route extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Customer_ServiceArea extends Google_Model
+class DoThatAPI_Service_OrderAPI_Schedule extends Google_Collection
+{
+  protected $collection_key = 'daysOfWeek';
+  protected $internal_gapi_mappings = array(
+  );
+  public $daysOfWeek;
+  public $scheduleType;
+
+
+  public function setDaysOfWeek($daysOfWeek)
+  {
+    $this->daysOfWeek = $daysOfWeek;
+  }
+  public function getDaysOfWeek()
+  {
+    return $this->daysOfWeek;
+  }
+  public function setScheduleType($scheduleType)
+  {
+    $this->scheduleType = $scheduleType;
+  }
+  public function getScheduleType()
+  {
+    return $this->scheduleType;
+  }
+}
+
+class DoThatAPI_Service_OrderAPI_ServiceArea extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1242,14 +1679,14 @@ class DoThatAPI_Service_Customer_ServiceArea extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Customer_ServicedAddress extends Google_Model
+class DoThatAPI_Service_OrderAPI_ServicedAddress extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $businessName;
   public $floor;
   public $houseNumber;
-  protected $serviceAreaType = 'Dothatapi_Service_Customer_ServiceArea';
+  protected $serviceAreaType = 'Dothatapi_Service_OrderAPI_ServiceArea';
   protected $serviceAreaDataType = '';
   public $servicedAddressId;
 
@@ -1278,7 +1715,7 @@ class DoThatAPI_Service_Customer_ServicedAddress extends Google_Model
   {
     return $this->houseNumber;
   }
-  public function setServiceArea(Dothatapi_Service_Customer_ServiceArea $serviceArea)
+  public function setServiceArea(Dothatapi_Service_OrderAPI_ServiceArea $serviceArea)
   {
     $this->serviceArea = $serviceArea;
   }
