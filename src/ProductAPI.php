@@ -16,7 +16,7 @@
  */
 
 /**
- * Service definition for Product (v1).
+ * Service definition for ProductAPI (v1).
  *
  * <p>
  * API to access Products</p>
@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class DoThatAPI_Service_Product extends Google_Service
+class DoThatAPI_Service_ProductAPI extends Google_Service
 {
   /** View your email address. */
   const USERINFO_EMAIL =
@@ -38,7 +38,7 @@ class DoThatAPI_Service_Product extends Google_Service
   private $base_methods;
 
   /**
-   * Constructs the internal representation of the Product service.
+   * Constructs the internal representation of the ProductAPI service.
    *
    * @param Google_Client $client
    */
@@ -49,6 +49,10 @@ class DoThatAPI_Service_Product extends Google_Service
     $this->servicePath = 'product/v1/serviceProviders/';
     $this->version = 'v1';
     $this->serviceName = 'product';
+    $this->init();
+  }
+
+  public function init() {
 
     $this->base_methods = new Google_Service_Resource(
         $this,
@@ -95,6 +99,21 @@ class DoThatAPI_Service_Product extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'findProductsForCustomer' => array(
+              'path' => '{svcProviderId}/customers/{custId}/products',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'svcProviderId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'custId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'getProduct' => array(
               'path' => '{svcProviderId}/products/{prodId}',
               'httpMethod' => 'GET',
@@ -136,13 +155,13 @@ class DoThatAPI_Service_Product extends Google_Service
    * @param string $svcProviderId
    * @param DoThatAPI_Product $postBody
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Product_Product
+   * @return DoThatAPI_Service_ProductAPI_Product
    */
-  public function createProduct($svcProviderId, DoThatAPI_Service_Product_Product $postBody, $optParams = array())
+  public function createProduct($svcProviderId, DoThatAPI_Service_ProductAPI_Product $postBody, $optParams = array())
   {
     $params = array('svcProviderId' => $svcProviderId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('createProduct', array($params), "DoThatAPI_Service_Product_Product");
+    return $this->base_methods->call('createProduct', array($params), "DoThatAPI_Service_ProductAPI_Product");
   }
   /**
    * (deleteProduct)
@@ -164,13 +183,27 @@ class DoThatAPI_Service_Product extends Google_Service
    *
    * @param string $svcProviderId
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Product_ProductCollection
+   * @return DoThatAPI_Service_ProductAPI_ProductCollection
    */
   public function findProducts($svcProviderId, $optParams = array())
   {
     $params = array('svcProviderId' => $svcProviderId);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('findProducts', array($params), "DoThatAPI_Service_Product_ProductCollection");
+    return $this->base_methods->call('findProducts', array($params), "DoThatAPI_Service_ProductAPI_ProductCollection");
+  }
+  /**
+   * (findProductsForCustomer)
+   *
+   * @param string $svcProviderId
+   * @param string $custId
+   * @param array $optParams Optional parameters.
+   * @return DoThatAPI_Service_ProductAPI_ProductCollection
+   */
+  public function findProductsForCustomer($svcProviderId, $custId, $optParams = array())
+  {
+    $params = array('svcProviderId' => $svcProviderId, 'custId' => $custId);
+    $params = array_merge($params, $optParams);
+    return $this->base_methods->call('findProductsForCustomer', array($params), "DoThatAPI_Service_ProductAPI_ProductCollection");
   }
   /**
    * (getProduct)
@@ -178,13 +211,13 @@ class DoThatAPI_Service_Product extends Google_Service
    * @param string $svcProviderId
    * @param string $prodId
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Product_Product
+   * @return DoThatAPI_Service_ProductAPI_Product
    */
   public function getProduct($svcProviderId, $prodId, $optParams = array())
   {
     $params = array('svcProviderId' => $svcProviderId, 'prodId' => $prodId);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('getProduct', array($params), "DoThatAPI_Service_Product_Product");
+    return $this->base_methods->call('getProduct', array($params), "DoThatAPI_Service_ProductAPI_Product");
   }
   /**
    * (updateProduct)
@@ -193,13 +226,13 @@ class DoThatAPI_Service_Product extends Google_Service
    * @param string $prodId
    * @param DoThatAPI_Product $postBody
    * @param array $optParams Optional parameters.
-   * @return DoThatAPI_Service_Product_Product
+   * @return DoThatAPI_Service_ProductAPI_Product
    */
-  public function updateProduct($svcProviderId, $prodId, DoThatAPI_Service_Product_Product $postBody, $optParams = array())
+  public function updateProduct($svcProviderId, $prodId, DoThatAPI_Service_ProductAPI_Product $postBody, $optParams = array())
   {
     $params = array('svcProviderId' => $svcProviderId, 'prodId' => $prodId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('updateProduct', array($params), "DoThatAPI_Service_Product_Product");
+    return $this->base_methods->call('updateProduct', array($params), "DoThatAPI_Service_ProductAPI_Product");
   }
 }
 
@@ -207,7 +240,7 @@ class DoThatAPI_Service_Product extends Google_Service
 
 
 
-class DoThatAPI_Service_Product_Amount extends Google_Model
+class DoThatAPI_Service_ProductAPI_Amount extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -233,13 +266,13 @@ class DoThatAPI_Service_Product_Amount extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Product_Product extends Google_Collection
+class DoThatAPI_Service_ProductAPI_Product extends Google_Collection
 {
   protected $collection_key = 'priceLists';
   protected $internal_gapi_mappings = array(
   );
   public $active;
-  protected $availabilityType = 'Dothatapi_Service_Product_ProductAvailability';
+  protected $availabilityType = 'Dothatapi_Service_ProductAPI_ProductAvailability';
   protected $availabilityDataType = '';
   public $category;
   public $creationTimestamp;
@@ -247,7 +280,7 @@ class DoThatAPI_Service_Product_Product extends Google_Collection
   public $description;
   public $modificationTimestamp;
   public $name;
-  protected $priceListsType = 'Dothatapi_Service_Product_ProductPriceList';
+  protected $priceListsType = 'Dothatapi_Service_ProductAPI_ProductPriceList';
   protected $priceListsDataType = 'array';
   public $productCode;
   public $productId;
@@ -255,7 +288,7 @@ class DoThatAPI_Service_Product_Product extends Google_Collection
   public $quantityUnit;
   public $serviceProviderId;
   public $version;
-  protected $visibilityType = 'Dothatapi_Service_Product_ProductVisibility';
+  protected $visibilityType = 'Dothatapi_Service_ProductAPI_ProductVisibility';
   protected $visibilityDataType = '';
 
 
@@ -267,7 +300,7 @@ class DoThatAPI_Service_Product_Product extends Google_Collection
   {
     return $this->active;
   }
-  public function setAvailability(Dothatapi_Service_Product_ProductAvailability $availability)
+  public function setAvailability(Dothatapi_Service_ProductAPI_ProductAvailability $availability)
   {
     $this->availability = $availability;
   }
@@ -379,7 +412,7 @@ class DoThatAPI_Service_Product_Product extends Google_Collection
   {
     return $this->version;
   }
-  public function setVisibility(Dothatapi_Service_Product_ProductVisibility $visibility)
+  public function setVisibility(Dothatapi_Service_ProductAPI_ProductVisibility $visibility)
   {
     $this->visibility = $visibility;
   }
@@ -389,13 +422,13 @@ class DoThatAPI_Service_Product_Product extends Google_Collection
   }
 }
 
-class DoThatAPI_Service_Product_ProductAvailability extends Google_Model
+class DoThatAPI_Service_ProductAPI_ProductAvailability extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $availableFrom;
   public $availableUntil;
-  protected $scheduleType = 'Dothatapi_Service_Product_Schedule';
+  protected $scheduleType = 'Dothatapi_Service_ProductAPI_Schedule';
   protected $scheduleDataType = '';
 
 
@@ -415,7 +448,7 @@ class DoThatAPI_Service_Product_ProductAvailability extends Google_Model
   {
     return $this->availableUntil;
   }
-  public function setSchedule(Dothatapi_Service_Product_Schedule $schedule)
+  public function setSchedule(Dothatapi_Service_ProductAPI_Schedule $schedule)
   {
     $this->schedule = $schedule;
   }
@@ -425,12 +458,12 @@ class DoThatAPI_Service_Product_ProductAvailability extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Product_ProductCollection extends Google_Collection
+class DoThatAPI_Service_ProductAPI_ProductCollection extends Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Dothatapi_Service_Product_Product';
+  protected $itemsType = 'Dothatapi_Service_ProductAPI_Product';
   protected $itemsDataType = 'array';
 
 
@@ -444,19 +477,19 @@ class DoThatAPI_Service_Product_ProductCollection extends Google_Collection
   }
 }
 
-class DoThatAPI_Service_Product_ProductPrice extends Google_Model
+class DoThatAPI_Service_ProductAPI_ProductPrice extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $amountType = 'Dothatapi_Service_Product_Amount';
+  protected $amountType = 'Dothatapi_Service_ProductAPI_Amount';
   protected $amountDataType = '';
   public $duration;
   public $durationType;
-  protected $scheduleType = 'Dothatapi_Service_Product_Schedule';
+  protected $scheduleType = 'Dothatapi_Service_ProductAPI_Schedule';
   protected $scheduleDataType = '';
 
 
-  public function setAmount(Dothatapi_Service_Product_Amount $amount)
+  public function setAmount(Dothatapi_Service_ProductAPI_Amount $amount)
   {
     $this->amount = $amount;
   }
@@ -480,7 +513,7 @@ class DoThatAPI_Service_Product_ProductPrice extends Google_Model
   {
     return $this->durationType;
   }
-  public function setSchedule(Dothatapi_Service_Product_Schedule $schedule)
+  public function setSchedule(Dothatapi_Service_ProductAPI_Schedule $schedule)
   {
     $this->schedule = $schedule;
   }
@@ -490,13 +523,13 @@ class DoThatAPI_Service_Product_ProductPrice extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Product_ProductPriceList extends Google_Collection
+class DoThatAPI_Service_ProductAPI_ProductPriceList extends Google_Collection
 {
   protected $collection_key = 'prices';
   protected $internal_gapi_mappings = array(
   );
   public $endDate;
-  protected $pricesType = 'Dothatapi_Service_Product_ProductPrice';
+  protected $pricesType = 'Dothatapi_Service_ProductAPI_ProductPrice';
   protected $pricesDataType = 'array';
   public $startDate;
 
@@ -527,7 +560,7 @@ class DoThatAPI_Service_Product_ProductPriceList extends Google_Collection
   }
 }
 
-class DoThatAPI_Service_Product_ProductVisibility extends Google_Model
+class DoThatAPI_Service_ProductAPI_ProductVisibility extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -553,7 +586,7 @@ class DoThatAPI_Service_Product_ProductVisibility extends Google_Model
   }
 }
 
-class DoThatAPI_Service_Product_Schedule extends Google_Collection
+class DoThatAPI_Service_ProductAPI_Schedule extends Google_Collection
 {
   protected $collection_key = 'daysOfWeek';
   protected $internal_gapi_mappings = array(
